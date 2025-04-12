@@ -26,3 +26,5 @@ sudo apt-mark hold kubelet kubeadm kubectl
 
 sudo systemctl enable --now kubelet
 sudo systemctl enable containerd
+
+sudo snap install helm --classic
