@@ -1,0 +1,13 @@
+ingress:
+  enabled: true
+  className: "nginx"
+  host: "staging.env"
+  pathType: Prefix
+
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+
+  rules:
+    - path: /
+      service: api-gateway
+      port: 8080

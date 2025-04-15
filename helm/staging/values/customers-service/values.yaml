@@ -1,0 +1,6 @@
+services:
+  customers-service:
+    enabled: true
+    image: "championvi12/spring-petclinic-customers-service"
+    tag: "latest"
+    port: 8081
