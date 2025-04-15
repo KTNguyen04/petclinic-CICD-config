@@ -1,6 +1,0 @@
-services:
-  discovery-server:
-    enabled: true
-    image: "championvi12/spring-petclinic-discovery-server"
-    tag: "latest"
-    port: 8761

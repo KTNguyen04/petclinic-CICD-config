@@ -1,6 +1,0 @@
-services:
-  admin-server:
-    enabled: true
-    image: "championvi12/spring-petclinic-admin-server"
-    tag: "latest"
-    port: 9090
