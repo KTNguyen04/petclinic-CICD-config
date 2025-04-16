@@ -3,7 +3,7 @@
 sudo apt update -y
 
 sudo swapoff -a # temporary
-sudo sed -i '/ swap / s/^/#/' /etc/fstab # permanent
+sudo sed -i '/\bswap\b/ s/^/#/' /etc/fstab # permanent
 
 sudo apt install -y containerd
 sudo mkdir -p /etc/containerd

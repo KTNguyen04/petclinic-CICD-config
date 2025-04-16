@@ -1,0 +1,49 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: dev.env
+  namespace: argocd
+  annotations:
+    argocd-image-updater.argoproj.io/image-list: |
+      spring-petclinic-admin-server=docker.io/championvi12/spring-petclinic-admin-server:latest
+      spring-petclinic-api-gateway=docker.io/championvi12/spring-petclinic-api-gateway:latest
+      spring-petclinic-config-server=docker.io/championvi12/spring-petclinic-config-server:latest
+      spring-petclinic-customers-service=docker.io/championvi12/spring-petclinic-customers-service:latest
+      spring-petclinic-discovery-server=docker.io/championvi12/spring-petclinic-discovery-server:latest
+      spring-petclinic-genai-service=docker.io/championvi12/spring-petclinic-genai-service:latest
+      spring-petclinic-vets-service=docker.io/championvi12/spring-petclinic-vets-service:latest
+      spring-petclinic-visits-service=docker.io/championvi12/spring-petclinic-visits-service:latest
+    argocd-image-updater.argoproj.io/spring-petclinic-admin-server.update-strategy: digest
+    argocd-image-updater.argoproj.io/spring-petclinic-api-gateway.update-strategy: digest
+    argocd-image-updater.argoproj.io/spring-petclinic-config-server.update-strategy: digest
+    argocd-image-updater.argoproj.io/spring-petclinic-customers-service.update-strategy: digest
+    argocd-image-updater.argoproj.io/spring-petclinic-discovery-server.update-strategy: digest
+    argocd-image-updater.argoproj.io/spring-petclinic-genai-service.update-strategy: digest
+    argocd-image-updater.argoproj.io/spring-petclinic-vets-service.update-strategy: digest
+    argocd-image-updater.argoproj.io/spring-petclinic-visits-service.update-strategy: digest
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/KTNguyen04/petclinic-CICD-config.git
+    targetRevision: HEAD
+    path: helm/dev
+    helm:
+      valueFiles:
+        - values/admin-server/values.yaml
+        - values/api-gateway/values.yaml
+        - values/config-server/values.yaml
+        - values/customers-service/values.yaml
+        - values/discovery-server/values.yaml
+        - values/genai-service/values.yaml
+        - values/vets-service/values.yaml
+        - values/visits-service/values.yaml
+        - ingress-values.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: dev
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+    automated:
+      prune: true
+      selfHeal: true

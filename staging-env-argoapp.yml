@@ -1,0 +1,31 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: staging.env
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/KTNguyen04/petclinic-CICD-config.git
+    targetRevision: HEAD
+    path: helm/staging
+    helm:
+      valueFiles:
+        - values/admin-server/values.yaml
+        - values/api-gateway/values.yaml
+        - values/config-server/values.yaml
+        - values/customers-service/values.yaml
+        - values/discovery-server/values.yaml
+        - values/genai-service/values.yaml
+        - values/vets-service/values.yaml
+        - values/visits-service/values.yaml
+        - ingress-values.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: staging
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+    automated:
+      prune: true
+      selfHeal: true
