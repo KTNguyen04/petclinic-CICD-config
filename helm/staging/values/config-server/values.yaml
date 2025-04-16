@@ -2,5 +2,5 @@ services:
   config-server:
     enabled: true
     image: "championvi12/spring-petclinic-config-server"
-    tag: "latest"
+    tag: "ma.test.tag"
     port: 8888

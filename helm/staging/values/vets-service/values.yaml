@@ -2,5 +2,5 @@ services:
   vets-service:
     enabled: true
     image: "championvi12/spring-petclinic-vets-service"
-    tag: "latest"
+    tag: "ma.test.tag"
     port: 8083
