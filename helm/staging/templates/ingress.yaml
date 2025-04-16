@@ -2,9 +2,9 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: {{ include "preview-deploy.fullname" . }}
+  name: {{ include "staging.fullname" . }}
   labels:
-    {{- include "preview-deploy.labels" . | nindent 4 }}
+    {{- include "staging.labels" . | nindent 4 }}
   annotations:
     {{- range $key, $value := .Values.ingress.annotations }}
     {{ $key }}: {{ $value | quote }}

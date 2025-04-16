@@ -5,7 +5,7 @@ kind: Deployment
 metadata:
   name: {{ $name }}
   labels:
-    env: preview-deploy
+    env: staging
 spec:
   replicas: 1
   selector:
